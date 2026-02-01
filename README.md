@@ -64,4 +64,6 @@ python scripts/part3_eval_simulations.py --use-llm --prompt-name metadata_harmon
 python scripts/part4_gbm_pipeline.py --config configs/gbm.yaml --models configs/models.yaml
 ```
 
+Probably here there could be used other additional ways to deal with the batch effects as analysis using (Harmony)[https://github.com/lilab-bcb/harmony-pytorch] or (scVI)[https://docs.scvi-tools.org/en/stable/tutorials/notebooks/quick_start/api_overview.html]
+
 
