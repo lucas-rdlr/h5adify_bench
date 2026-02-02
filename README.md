@@ -14,6 +14,8 @@ The `normalization.yaml` included in `/configs` makes the scoring robust to syno
 
 The `configs/field_weights.yaml` lets you compute a **single composite score (weighted average)**.
 
+The `configs/field_map.yaml` because prediction JSONs often differ by method, we map each method’s schema to the canonical fields.
+
 # Part 1 - DOI20 metadata harmonization benchmark
 
 This part evaluates how accurately metadata fields can be identified and standardized from single-cell datasets, with and without LLM assistance.
