@@ -1,4 +1,4 @@
-## Initial installation
+# Initial installation
 
 ```
 bash scripts/install.sh /absolute/path/to/h5adify_v0.0.7_final.zip
@@ -10,14 +10,14 @@ For the analysis of the pdf and html documents, this should be installed.
 python -m pip install -U pyyaml requests tqdm beautifulsoup4 lxml pymupdf
 ```
 
-# Part 1 — DOI20 metadata harmonization benchmark
+# Part 1 - DOI20 metadata harmonization benchmark
 
 This part evaluates how accurately metadata fields can be identified and standardized from single-cell datasets, with and without LLM assistance.
 
-## Part 1a — Dataset-only harmonization 🧪  
+## Part 1a - Dataset-only harmonization 🧪  
 *download → gold → run models → score*
 
-### Dataset retrieval and preparation
+### 1.1. Dataset retrieval and preparation
 
 This step maps a predefined list of DOIs (the DOI20 benchmark set) to publicly available single-cell datasets hosted in the CellxGene Census, downloads the corresponding data, and prepares standardized `.h5ad` files for downstream benchmarking.
 
@@ -32,7 +32,7 @@ For each DOI, the script:
    (for faster benchmarking and LLM evaluation).
 5. Records all results in a manifest file, including missing DOIs and errors.
 
-#### Output structure
+**Output structure**
 
 Datasets are downloaded to the directory specified by `download.out_dir`
 in `configs/doi20.yaml`, which by default has the following structure:
@@ -51,14 +51,14 @@ data/
 comparisons are grounded in the same curated, reproducible datasets.
 
 
-#### Download the datasets
+**Download the datasets**
 
 ```
 source .venv/bin/activate
 python scripts/part1_download_doi20.py --doi-config configs/doi20.yaml
 ```
 
-### Gold standard construction
+### 1.2. Gold standard construction
 
 This step constructs the gold-standard annotations used to evaluate metadata
 harmonization performance in Part 1.
@@ -79,7 +79,7 @@ For each dataset listed in the DOI20 manifest, the script:
    Census metadata and controlled vocabularies.
 5. Records all results in a structured gold JSON file.
 
-#### Output
+**Output**
 
 The gold standard is written to: `gold/doi20_gold.json`
 
@@ -91,13 +91,13 @@ Each entry specifies:
 This gold file defines the reference against which both LLM-based and deterministic
 metadata harmonization methods are evaluated in subsequent steps.
 
-#### Run the gold standard
+**Run the gold standard**
 
 ```
 python scripts/part1_make_gold.py --manifest data/doi20/manifest.json --out gold/doi20_gold.json --use-small
 ```
 
-### Metadata harmonization benchmark run
+### 1.3. Metadata harmonization benchmark run
 
 This step executes metadata harmonization on the DOI20 datasets using either LLM-assisted or deterministic methods and records structured predictions for subsequent evaluation. It isolates harmonization behavior from evaluation, allowing prompt, model, and method variations to be explored independently.
 
@@ -115,7 +115,7 @@ For each dataset and each configured model, the script:
 Both LLM-based and non-LLM (deterministic) runs use the same datasets and gold
 definitions, enabling direct comparison.
 
-#### Output structure
+**Output structure**
 
 Results are written to a model-organized directory structure:
 
@@ -131,19 +131,19 @@ results/part1/
 
 The outputs of this step are evaluated against the gold standard in the scoring stage of Part 1.
 
-#### Run llm benchmark
+**Run llm benchmark**
 
 ```
 python scripts/part1_run_benchmark.py --use-llm --prompt-name metadata_harmonize_v1_default --save-h5ad --prefer-small
 ```
 
-### Run deterministic (no benchmark)
+**Run deterministic (no benchmark)**
 
 ```
 python scripts/part1_run_benchmark.py --prompt-name metadata_harmonize_v1_default --prefer-small
 ```
 
-### Scoring and evaluation
+### 1.4. Scoring and evaluation
 
 This step evaluates metadata harmonization predictions against the gold standard
 defined in Part 1 and computes quantitative performance metrics.
@@ -160,7 +160,7 @@ mappings to the gold reference and reports:
   labels.
 - **Runtime**: elapsed time per dataset.
 
-#### Outputs
+**Outputs**
 
 Two evaluation tables are written to the output directory:
 
@@ -172,7 +172,7 @@ results/part1_scores/
 
 The long-format table enables detailed error analysis, while the summary table supports direct comparison across models, prompts, and harmonization methods.
 
-#### Run scores of part 1
+**Run scores of part 1**
 
 ```
 python scripts/part1_score.py --gold gold/doi20_gold.json --results results/part1 --outdir results/part1_scores
@@ -199,7 +199,7 @@ python scripts/part1_fetch_manuscripts.py --doi-config configs/doi20.yaml --outd
 python scripts/part1_extract_manuscript_text.py --papers-dir papers
 ```
 
-Run example with qwen2.5:3b
+**Run example with qwen2.5:3b**
 
 ```
 python scripts/part1_run_annotation_paperaware.py \
@@ -210,7 +210,7 @@ python scripts/part1_run_annotation_paperaware.py \
   --verify
 ```
 
-# Avatar vs TextGrad prompt optimization (metadata mapping prompt)
+# Part 2 - Avatar vs TextGrad prompt optimization (metadata mapping prompt)
 
 ```
 python scripts/part2_optimize_prompts.py --method avatar --opt-model qwen2.5:3b
