@@ -12,6 +12,8 @@ python -m pip install -U pyyaml requests tqdm beautifulsoup4 lxml pymupdf
 
 The `normalization.yaml` included in `/configs` makes the scoring robust to synonyms / formatting (e.g., “Homo sapiens” vs “human”, “10x Visium” vs “Visium”).
 
+The `configs/field_weights.yaml` lets you compute a **single composite score (weighted average)**.
+
 # Part 1 - DOI20 metadata harmonization benchmark
 
 This part evaluates how accurately metadata fields can be identified and standardized from single-cell datasets, with and without LLM assistance.
