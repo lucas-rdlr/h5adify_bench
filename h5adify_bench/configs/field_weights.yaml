@@ -1,0 +1,8 @@
+weights:
+  species: 2.0
+  assay_modalities: 2.0
+  technology: 2.0
+  repositories: 2.0
+  tissue_scope: 1.0
+  disease_or_context: 1.0
+  title: 0.5
