@@ -1,0 +1,95 @@
+species:
+  human:
+    - "homo sapiens"
+    - "human"
+    - "9606"
+  mouse:
+    - "mus musculus"
+    - "mouse"
+    - "10090"
+  rat:
+    - "rattus norvegicus"
+    - "rat"
+    - "10116"
+
+modalities:
+  scrna-seq:
+    - "scrna-seq"
+    - "single-cell rna-seq"
+    - "single cell rna sequencing"
+    - "sc rna-seq"
+  snrna-seq:
+    - "snrna-seq"
+    - "single-nucleus rna-seq"
+    - "single nucleus rna sequencing"
+  spatial_transcriptomics:
+    - "spatial transcriptomics"
+    - "visium"
+    - "10x visium"
+    - "10x genomics visium"
+  cite-seq:
+    - "cite-seq"
+    - "rna+protein"
+    - "adt"
+  atac-seq:
+    - "scatac-seq"
+    - "atac"
+    - "chromatin accessibility"
+  multiome_rna_atac:
+    - "multiome"
+    - "rna+atac"
+    - "paired rna+atac"
+    - "multiome (rna+atac)"
+
+technology:
+  visium:
+    - "visium"
+    - "10x visium"
+    - "10x genomics visium"
+  slide-seq:
+    - "slide-seq"
+    - "slideseq"
+    - "slide-seqv2"
+    - "slideseqv2"
+  merfish:
+    - "merfish"
+  starmap:
+    - "starmap"
+  snare-seq:
+    - "snare-seq"
+  share-seq:
+    - "share-seq"
+  sci-car:
+    - "sci-car"
+  tea-seq:
+    - "tea-seq"
+    - "asap-seq"
+  stereoseq:
+    - "stereo-seq"
+    - "stereoseq"
+
+repositories:
+  geo:
+    - "geo"
+    - "ncbi geo"
+  ega:
+    - "ega"
+  synapse:
+    - "synapse"
+  arrayexpress:
+    - "arrayexpress"
+  cnp:
+    - "cngbdb"
+    - "cnp"
+  zenodo:
+    - "zenodo"
+  figshare:
+    - "figshare"
+  dryad:
+    - "dryad"
+  globus:
+    - "globus"
+  scp:
+    - "single cell portal"
+    - "broad single cell portal"
+    - "scp"
