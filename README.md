@@ -385,3 +385,73 @@ python scripts/part4_gbm_pipeline.py --config configs/gbm.yaml --models configs/
 ```
 
 Probably here there could be used other additional ways to deal with the batch effects as analysis using [Harmony](https://github.com/lilab-bcb/harmony-pytorch) or [scVI](https://docs.scvi-tools.org/en/stable/tutorials/notebooks/quick_start/api_overview.html)
+
+## Project maturity checklist
+
+<details><summary>Show more</summary>
+
+### Core infrastructure
+- ✅ Repository structure and scripts stabilized
+- ✅ Configuration-driven workflows (`configs/*.yaml`)
+- ✅ Deterministic (non-LLM) harmonization baseline
+- ✅ LLM-assisted harmonization pipeline
+- ✅ Unified prediction format (`pred.json`)
+- 🚧 Containerized / Docker-based execution
+
+### Part 1 — DOI20 metadata harmonization benchmark
+- ✅ DOI → CellxGene Census dataset resolution
+- ✅ Dataset download and manifest generation
+- ✅ Small `.h5ad` subsampling for scalability
+- ⚠️ Gold-standard construction from `.obs` metadata
+- 🔍 Dataset-only harmonization benchmark
+- 🔍 Quantitative scoring framework (accuracy, completeness, hallucination)
+- 🔍 Cross-model benchmarking (multiple LLMs)
+- 🔍 Statistical significance testing across models/prompts
+
+### Part 1b — Paper-aware harmonization
+- 🔍 DOI-based manuscript retrieval (PDF / HTML)
+- 🔍 Manuscript text extraction and preprocessing
+- 🔍 Paper-aware LLM annotation pipeline
+- 🔍 Paper-aware vs dataset-only comparison
+- 🔍 Evidence-support (faithfulness) proxy metric
+- 🔍 Section-level citation grounding
+- 🔍 Sensitivity analysis to manuscript noise/length
+
+### Part 1c — Prompt optimization (Avatar / TextGrad)
+- 🔍 Avatar-style prompt optimization
+- 🔍 TextGrad-style prompt optimization
+- 🔍 Paper-aware training JSONL generation
+- 🔍 Re-running Part 1 with optimized prompts
+- 🔍 Prompt-variant comparison across models
+- 🔍 Robustness analysis across random seeds
+
+### Part 2 — Synthetic simulations
+- 🔍 Synthetic `.h5ad` simulation pipeline
+- 🔍 Hallucination and robustness evaluation
+- 🔍 Expanded simulation scenarios (missing/contradictory metadata)
+- 🔍 Stress tests under extreme class imbalance
+
+### Part 3 — Biological application (GBM)
+- ❌ Multi-dataset GBM harmonization pipeline
+- ❌ Dataset merging and integration
+- ❌ Sex-specific marker analysis
+- ❌ Harmony-based batch correction baseline
+- ❌ scVI-based batch correction baseline
+- ❌ External biological validation
+
+### Evaluation, documentation, and release
+- ❌ Final manuscript-aligned abstract
+- ❌ Public documentation polish
+- ❌ Contribution guidelines
+
+### Legend
+
+- ✅ stable
+- ❌ not implemented
+- 🔍 needs review
+- 🧪 experimental
+- 🚧 in progress
+- ⚠️ known limitations
+- 📝 documentation needed
+- 💡 open question
+</details>
