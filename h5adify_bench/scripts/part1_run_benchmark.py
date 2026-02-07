@@ -38,8 +38,8 @@ def preview_canon(adata: Any, fields: List[str]) -> Dict[str, Any]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", default="configs/models.yaml")
-    ap.add_argument("--gold", default="gold/doi20_gold.json")
-    ap.add_argument("--results", default="results/part1")
+    ap.add_argument("--gold", default="experiments/gold/doi20_gold.json")
+    ap.add_argument("--results", default="experiments/results/part1")
     ap.add_argument("--prompt-name", default="metadata_harmonize_v1_default")
     ap.add_argument("--use-llm", action="store_true")
     ap.add_argument("--no-sex-from-expression", action="store_true")

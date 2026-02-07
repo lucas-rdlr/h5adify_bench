@@ -48,9 +48,9 @@ def extract_pred_canon(pred: Dict[str, Any]) -> Dict[str, List[str]]:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--gold", default="gold/doi20_gold.json")
-    ap.add_argument("--results", default="results/part1")
-    ap.add_argument("--outdir", default="results/part1_scores")
+    ap.add_argument("--gold", default="experiments/gold/doi20_gold.json")
+    ap.add_argument("--results", default="experiments/results/part1")
+    ap.add_argument("--outdir", default="experiments/results/part1_scores")
     args = ap.parse_args()
 
     ensure_dir(args.outdir)

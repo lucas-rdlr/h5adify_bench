@@ -63,7 +63,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--doi-config", required=True, help="configs/doi20.yaml")
     ap.add_argument("--papers-dir", default="papers")
-    ap.add_argument("--outdir", default="results_part1_paperaware")
+    ap.add_argument("--outdir", default="experiments/results_part1_paperaware")
     ap.add_argument("--ollama-url", default="http://localhost:11434")
     ap.add_argument("--ollama-model", default=os.environ.get("H5ADIFY_MODEL", "qwen2.5:3b"))
     ap.add_argument("--prompt-name", default="extraction_v2_default")

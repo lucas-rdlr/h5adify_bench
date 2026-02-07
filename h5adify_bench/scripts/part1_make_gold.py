@@ -77,8 +77,8 @@ def is_valid_column(adata, col_name: str) -> bool:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--manifest", default="data/doi20/manifest.json")
-    ap.add_argument("--out", default="gold/doi20_gold.json")
+    ap.add_argument("--manifest", default="experiments/data/doi20/manifest.json")
+    ap.add_argument("--out", default="experiments/gold/doi20_gold.json")
     ap.add_argument("--use-small", action="store_true", help="Prefer .small.h5ad when available")
     args = ap.parse_args()
 
