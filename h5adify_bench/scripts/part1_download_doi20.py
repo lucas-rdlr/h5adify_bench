@@ -76,23 +76,23 @@ def main():
     manifest_path = out_dir / "manifest.json"
 
     if manifest_path.exists():
-	    print(f"[i] Resuming from existing manifest: {manifest_path}")
-	    manifest = read_json(manifest_path)
+        print(f"[i] Resuming from existing manifest: {manifest_path}")
+        manifest = read_json(manifest_path)
     else:
-	    manifest = {
-	        "created_at": now_iso(),
-	        "census_version": census_version,
-	        "items": [],
-	        "missing": [],
-	        "errors": [],
-	    }
-	    manifest.setdefault("in_progress", [])
+        manifest = {
+            "created_at": now_iso(),
+            "census_version": census_version,
+            "items": [],
+            "missing": [],
+            "errors": [],
+        }
+        manifest.setdefault("in_progress", [])
 
     processed_dois = {
-	    entry["doi"]
-	    for section in ("items", "missing", "errors")
-	    for entry in manifest.get(section, [])
-	    if "doi" in entry
+        entry["doi"]
+        for section in ("items", "missing", "errors")
+        for entry in manifest.get(section, [])
+        if "doi" in entry
     }
 
     pbar = tqdm(cfg["dois"], desc="DOIs")
@@ -153,8 +153,8 @@ def main():
             manifest["errors"].append({"doi": doi, "stage": "download", "error": humanize_exception(e)})
             
         finally:
-	        clear_in_progress(manifest, doi)
-	        write_json(manifest_path, manifest)
+            clear_in_progress(manifest, doi)
+            write_json(manifest_path, manifest)
 
     write_json(out_dir / "manifest.json", manifest)
     print(f"[ok] Wrote manifest: {out_dir/'manifest.json'}")
