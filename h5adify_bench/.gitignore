@@ -1,3 +1,13 @@
 *.h5ad
 
 experiments
+
+# Ignore full simulation outputs and local env
+simulations/Tests/
+simulations/h5adify_env/
+simulations/Notes.txt
+
+# Common local virtual environments
+.venv/
+venv/
+env/
