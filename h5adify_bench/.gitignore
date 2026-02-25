@@ -6,6 +6,7 @@ experiments
 simulations/Tests/
 simulations/h5adify_env/
 simulations/Notes.txt
+simulations/h5adify_benchmark_st_improved_v35.py
 
 # Common local virtual environments
 .venv/
