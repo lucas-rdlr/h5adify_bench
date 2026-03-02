@@ -19,8 +19,9 @@ from h5adify.core.metadata_harmonize import load_metadata_vocab
 FIELD_SYNONYMS = {
     "batch":   ["batch", "batch_id", "library", "library_id", "run", "lane", "seq_batch", "chemistry_batch"],
     "sample":  ["sample", "sample_id", "sample_name", "biosample_id", "specimen", "specimen_id"],
-    "donor":   ["donor", "donor_id", "patient", "patient_id", "individual", "individual_id", "subject", "subject_id"],
-    "domain":  ["domain", "region", "anatomical_region", "area", "cluster", "subclass", "compartment"],
+    # "donor":   ["donor", "donor_id", "patient", "patient_id", "individual", "individual_id", "subject", "subject_id"],
+    # "domain":  ["domain", "region", "anatomical_region", "area", "cluster", "subclass", "compartment"],
+    "disease":  ["disease"],
     "sex":     ["sex", "gender", "donor_sex", "biological_sex"],
     # species/technology are often dataset-level or free text; keep for completeness
     "species": ["species", "organism"],
@@ -78,7 +79,7 @@ def is_valid_column(adata, col_name: str) -> bool:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--manifest", default="experiments/data/doi20/manifest.json")
-    ap.add_argument("--out", default="experiments/gold/doi20_gold.json")
+    ap.add_argument("--out", default="experiments/gold/doi20_gold_all.json")
     ap.add_argument("--use-small", action="store_true", help="Prefer .small.h5ad when available")
     args = ap.parse_args()
 
@@ -92,7 +93,7 @@ def main():
     gold: Dict[str, Any] = {
         "created_at": now_iso(),
         "manifest": args.manifest,
-        "fields": ["batch", "sample", "donor", "domain", "sex", "species", "technology"],
+        "fields": ["batch", "sample", "disease", "sex", "species", "technology"],
         "items": [],
     }
 
@@ -144,15 +145,16 @@ def main():
             "dataset_id": it["dataset_id"],
             "h5ad_path": str(path),
             "obs_columns": obs_cols,
-            "gold_key": chosen,                    # obs key expected (or None)
-            "gold_species_canon": species_canon,   # "human"/"mouse"/"rat"/...
-            "gold_technology_canon": tech_canon,   # e.g. "Visium"/"MERFISH"/...
-            "meta": {
-                "organism_raw": it.get("organism", ""),
-                "assay_raw": tech_raw,
-                "dataset_title": it.get("dataset_title", ""),
-                "collection_name": it.get("collection_name", ""),
-            }
+            "columns_selection": chosen,                    # obs key expected (or None)
+            "global_inference": {f: None for f in gold["fields"]},
+            # "gold_species_canon": species_canon,   # "human"/"mouse"/"rat"/...
+            # "gold_technology_canon": tech_canon,   # e.g. "Visium"/"MERFISH"/...
+            # "meta": {
+            #     "organism_raw": it.get("organism", ""),
+            #     "assay_raw": tech_raw,
+            #     "dataset_title": it.get("dataset_title", ""),
+            #     "collection_name": it.get("collection_name", ""),
+            # }
         })
 
     write_json(args.out, gold)

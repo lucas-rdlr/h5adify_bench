@@ -1,5 +1,0 @@
-model,prompt_name,use_llm,doi,dataset_id,status,elapsed_sec,completeness,acc_map_batch,acc_map_sample,acc_map_donor,acc_map_domain,acc_map_sex,acc_map_species,acc_map_technology,halluc_batch,halluc_sample,halluc_donor,halluc_domain,halluc_sex,halluc_species,halluc_technology,acc_val_species,acc_val_technology,acc_val_sex
-deterministic,metadata_harmonize_v1_default,False,10.1038/s41586-020-2157-4,2adb1f8a-a6b1-4909-8ee8-484814e2d4bf,ok,29.63,0.7142857142857143,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,
-deterministic,metadata_harmonize_v1_default,False,10.1038/s41586-020-2496-1,f16a8f4d-bc97-43c5-a2f6-bbda952e4c5c,ok,54.772,0.7142857142857143,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,
-deterministic,metadata_harmonize_v1_default,False,10.1038/s41586-018-0654-5,28c696bb-9549-434b-9340-dc745a846f9a,ok,12.69,0.7142857142857143,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,
-deterministic,metadata_harmonize_v1_default,False,10.1038/s41586-020-2922-4,8c42cfd0-0b0a-46d5-910c-fc833d83c45e,ok,8.244,0.8571428571428571,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,

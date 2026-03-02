@@ -1,4 +1,0 @@
-model,prompt_name,use_llm,elapsed_sec,completeness,acc_map_batch,acc_map_sample,acc_map_donor,acc_map_domain,acc_map_sex,acc_map_species,acc_map_technology,halluc_batch,halluc_sample,halluc_donor,halluc_domain,halluc_sex,halluc_species,halluc_technology,acc_val_species,acc_val_technology,acc_val_sex
-deterministic,metadata_harmonize_v1_default,False,26.334,0.75,0.5,1.0,1.0,0.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
-llama3:latest,metadata_harmonize_v1_default,True,27.827749999999998,0.75,0.75,1.0,1.0,0.25,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
-qwen2.5:3b,metadata_harmonize_v1_default,True,29.678749999999997,0.75,0.75,1.0,1.0,0.25,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,

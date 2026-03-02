@@ -13,6 +13,9 @@ import numpy as np
 import pandas as pd
 import yaml
 
+import logging
+import sys
+
 
 def now_iso() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%S")
@@ -108,7 +111,7 @@ def canonicalize_species_to_h5adify(name: str) -> str:
         return "mouse"
     if "rattus norvegicus" in s or s == "rat":
         return "rat"
-    return name or "unknown"
+    return name or None
 
 
 def detect_technology_from_string(s: str, tech_keywords: Dict[str, List[str]]) -> str:
@@ -117,7 +120,7 @@ def detect_technology_from_string(s: str, tech_keywords: Dict[str, List[str]]) -
         for kw in kws:
             if kw.lower() in x:
                 return canon
-    return s or "unknown"
+    return s or None
 
 
 def pick_best_gold_key(obs_columns: List[str], candidates: List[str]) -> Optional[str]:
@@ -127,3 +130,84 @@ def pick_best_gold_key(obs_columns: List[str], candidates: List[str]) -> Optiona
         return None
     # prefer deterministic stable selection
     return sorted(inter, key=lambda z: (len(z), z.lower()))[0]
+
+
+from tqdm import tqdm
+
+class TqdmLoggingHandler(logging.Handler):
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            tqdm.write(msg)
+        except Exception:
+            self.handleError(record)
+
+def setup_logging(log_file: str = None, level: int = logging.INFO):
+
+    fmt = logging.Formatter(
+        fmt="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+        datefmt="%H:%M:%S"
+    )
+
+    logger = logging.getLogger()
+    logger.setLevel(level)
+
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    # ✅ Replace StreamHandler with TqdmLoggingHandler
+    ch = TqdmLoggingHandler()
+    ch.setFormatter(fmt)
+    logger.addHandler(ch)
+
+    # File handler remains unchanged
+    if log_file:
+        log_path = Path(log_file)
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        fh = logging.FileHandler(log_path, mode='w')
+        fh.setFormatter(fmt)
+        logger.addHandler(fh)
+
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+
+    return logger
+
+
+# def setup_logging(log_file: str = None, level: int = logging.INFO):
+#     """
+#     Configures logging for the benchmark script AND the h5adify library.
+#     """
+#     # 1. format the log
+#     fmt = logging.Formatter(
+#         fmt="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+#         datefmt="%H:%M:%S"
+#     )
+
+#     # 2. Get the root logger (or specifically 'h5adify' if you want to isolate it)
+#     # Using root logger captures logs from your script, h5adify, and requests/urllib3
+#     logger = logging.getLogger()
+#     logger.setLevel(level)
+
+#     # 3. Reset handlers (prevents duplicate logs if run in notebooks/repeatedly)
+#     if logger.hasHandlers():
+#         logger.handlers.clear()
+
+#     # 4. Console Handler (Standard Output)
+#     ch = logging.StreamHandler(sys.stdout)
+#     ch.setFormatter(fmt)
+#     logger.addHandler(ch)
+
+#     # 5. File Handler (Optional)
+#     if log_file:
+#         log_path = Path(log_file)
+#         log_path.parent.mkdir(parents=True, exist_ok=True)
+#         fh = logging.FileHandler(log_path, mode='w') # 'w' overwrites, 'a' appends
+#         fh.setFormatter(fmt)
+#         logger.addHandler(fh)
+        
+#     # 6. Quiet down noisy libraries (optional)
+#     logging.getLogger("urllib3").setLevel(logging.WARNING)
+#     logging.getLogger("httpx").setLevel(logging.WARNING)
+    
+#     return logger

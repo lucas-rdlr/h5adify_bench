@@ -1,6 +1,9 @@
 ollama_base_url: "http://localhost:11434"
 models:
-  - name: "qwen2.5:3b"
-  - name: "llama3:latest"
-#  - name: "mistral-nemo:latest"
-#  - name: "deepseek-r1:8b"
+  # - name: "ministral-3:latest"
+  # - name: "llama3:latest"
+  # - name: "qwen3:8b"
+  - name: "gemma3:latest"
+  # - name: "llama3.2:3b"
+  # - name: "mistral:7b"
+  # - name: "mistral-nemo:12b"

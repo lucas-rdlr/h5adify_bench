@@ -1,0 +1,20 @@
+# --- core ---
+numpy
+pandas
+scipy
+scikit-learn
+anndata
+scanpy
+pyyaml
+tqdm
+requests
+matplotlib
+
+# --- for doi dataset download via CELLxGENE Census ---
+cellxgene-census
+tiledbsoma
+
+# --- optional (Part 4 integration) ---
+# harmonypy
+# scvi-tools
+# torch
